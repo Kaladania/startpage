@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>New Tab</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans|Alexandria|Courier Prime">
+<style>
+:root {
+  --accent: #FF003D;
+  --secondary: #4F4F44;
+}
+
+html {
+  background-image: linear-gradient(#171616, #1F1E1E);
+  height: 100vh;
+}
+
+.startpage {
+  left: 12vw;
+  position: absolute;
+  right: 12vw;
+  top: 183px;
+  height: 539px;
+  background-color: #00000014;
+}
+
+.flex-box {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.pageImages {
+  width: 351px;
+}
+
+.images {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 9px;
+  filter: drop-shadow(8px 7px 0.1px #0000001C);
+}
+
+.pageLinks {
+  display: flex;
+  flex-flow: column;
+  padding-left: 45px;
+}
+
+#clock {
+color: var(--accent);
+font-size: 100px;
+font-weight: bolder;
+list-style-type: none;
+display: inherit;
+font-family: Open Sans, sans-serif;
+margin: 0;
+padding: 0;
+}
+
+#clock p {
+  margin: 0;
+}
+
+#clock li:not(li:nth-child(1)) {
+  padding-left: 12px;
+}
+
+#delimeter {
+  color: #4F4F44;
+  font-weight: lighter;
+  font-size: smaller;
+  padding-top: 8px;
+}
+
+#date {
+color: var(--secondary);
+font-family: Alexandria, sans-serif;
+text-transform: uppercase;
+letter-spacing: 1.1px;
+margin: 0;
+padding-left: 7px;
+}
+
+.topHalf {
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+}
+
+#dateTime {
+  display: flex;
+  flex-direction: column;
+}
+
+.topHalf iframe {
+  margin: auto;
+  margin-top: 32px;
+}
+
+
+.bookmarks {
+  display: flex;
+  flex-direction: row;
+  margin-top: 35px;
+}
+
+.bookmarks ul {
+  font-family: Courier Prime, sans-serif;
+  color: var(--secondary);
+  list-style-type: none;
+  padding-left: 7px;
+  margin: 0;
+}
+
+.bookmarks ul:not(.bookmarks ul:first-child) {
+  padding-left: 54px;
+}
+
+.bookmarks li:not(.groupheader) {
+  padding-top: 2px;
+  transition: 0.3s;
+}
+
+.bookmarks li:not(.groupheader):hover {
+  color: wheat;
+  transition: ease-in-out;
+}
+
+.bookmarks a {
+  color: var(--secondary);
+  text-decoration: transparent;
+  transition: 0.3s;
+}
+
+.bookmarks a:hover {
+  color: wheat;
+  transition: ease-in-out;
+}
+
+.groupheader {
+  font-weight: bold;
+  font-size: larger;
+  color: var(--accent);
+  padding-bottom: 6px;
+}
+
+.dropdown {
+  display: none;
+  flex-direction: column;
+  background-color: #151212;
+  filter: drop-shadow(4px 4px 4px #00000045);
+  position: absolute;
+  margin: 0;
+  z-index: 1;
+  border-radius: 4px;
+  padding: 2px 7px 2px 7px;
+  left: 328px;
+}
+
+.more-options:hover + .dropdown:hover {
+  opacity: 1;
+}
+
+.dropdown-hover:hover .dropdown {
+display: flex;
+}
+
+</style>
+</head>
+<body>
+
+<div class="startpage">
+	<div class ="flex-box">
+		<div class ="pageImages">
+
+			<script>
+			function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
+document.write('<img class="images" src="Images/' + getRandomInt(1, 5) + '.gif">')
+			</script>
+		</div>
+		<div class="pageLinks" style="flex-grow: 3"> 
+    <div class="topHalf">
+	<div id="dateTime">
+			<script>
+				function getOrdinal(n) {
+  					let ord = 'th';
+
+  					if (n % 10 == 1 && n % 100 != 11)
+  					{
+    						ord = 'st';
+  					}
+  					else if (n % 10 == 2 && n % 100 != 12)
+  					{
+    						ord = 'nd';
+  					}
+  					else if (n % 10 == 3 && n % 100 != 13)
+  					{
+    						ord = 'rd';
+  					}
+
+  					return ord;
+					};
+
+					var ordinal  = getOrdinal(new Date().toLocaleDateString("en-US", {day: 'numeric'}));
+
+
+			</script>
+			<ul id="clock">
+			<li><p id="hour"></p></li>
+			<li><p id="delimeter"></p></li>
+			<li><p id="minute"></p></li>
+			</ul>
+
+			<script>
+  				function callTime(){
+					var today  = new Date();
+    					var currentHour=((today.getHours()<10?'0':'') + today.getHours()); 
+					var currentMinute=((today.getMinutes()<10?'0':'') + today.getMinutes());
+    					document.getElementById('hour').innerHTML=`${currentHour}`;
+					document.getElementById('delimeter').innerHTML=`:`;
+					document.getElementById('minute').innerHTML=`${currentMinute}`;
+  				}
+  
+ 
+				setInterval(function(){  callTime() }, 1000);
+			</script>
+			<p id="date"></p>
+			<script>
+  				function callDate(){
+				
+				var today  = new Date();
+
+				var currentDay = (today.toLocaleDateString("en-US", {weekday: 'short'}));
+				var currentDate = ((new Date()).toLocaleDateString("en-US", {day: 'numeric'}));
+				var currentMonth = ((new Date()).toLocaleDateString("en-US", {month: 'long'}));
+    				document.getElementById('date').innerHTML=`${currentDay} ${currentDate}${ordinal} ${currentMonth}`;
+  				}
+  
+ 
+				setInterval(function(){  callDate() }, 1000);
+			</script>
+		</div>
+  	</div>
+			<div class="bookmarks">
+  				<ul>
+  				<li class="groupheader">Media</li>
+  				<li><a href ="https://100.117.92.45:8096/">Jellyfin</a></li>
+  				<li><a href ="https://trello.com/b/qqk1PpIE/mediafin">Mediafin</a></li>
+  				<li><a href ="https://www.youtube.com/">Youtube</a></li>
+  				<li><a href ="https://www.amazon.co.uk/gp/video/storefront/ref=atv_dp_tv_c_9zZ8D2_1_0?node=3010085031">Prime</a></li>
+  				<li><a href ="https://www.netflix.com/gb/">Netflix</a></li>
+  				<div class="dropdown-hover"><li>Cartoons</li>
+  					<div class="dropdown">
+        					<a href="https://kimcartoon.li/" class="dropdown-link">Kimcartoon</a>
+        					<a href="https://www.wcostream.com/" class="dropdown-link">WCOstream</a>
+        					<a href="https://gogoanimes.to/" class="dropdown-link">GogoAnime</a>
+      				</div>
+  				</div>
+  				<div class="dropdown-hover"><li>Movies</li>
+  					<div class="dropdown">
+        					<a href="https://ask4movie.me/" class="dropdown-link">Ask4Movies</a>
+        					<a href="https://movies7.io/home" class="dropdown-link">Movies7.io</a>
+        					<a href="https://fmoviesto.cc/home" class="dropdown-link">FMovies</a>
+      				</div>
+  				</div>
+				</ul>
+
+  				<ul>
+  				<li class="groupheader">Artists</li>
+  				<li><a href ="https://www.google.com/search?q=skailla&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiMhaiG_8j1AhULV8AKHUB0AswQ_AUoAXoECAEQAw&biw=1144&bih=718&dpr=1">Skailla</a></li>
+  				<li><a href ="https://www.google.com/search?q=nightrizer&tbm=isch&hl=en&sa=X&ved=2ahUKEwi6kJ33ucj1AhXJw-AKHS6iBiMQ3VZ6BAgBEBw&biw=1127&bih=718">Nightrizer</a></li>
+  				<li><a href ="https://www.google.com/search?q=temiree&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjSuMKovu3yAhXkQ0EAHSh4CesQ_AUoAXoECAEQAw&biw=1394&bih=912">Temiree</a></li>
+				<li><a href ="https://www.instagram.com/streetfair_art/?hl=en">StreetFaire</a></li>
+				<li><a href ="https://nitter.net/IndigoBeatss/media?cursor=HBaCwKKdqtfk%2FyQAAA%3D%3D">IndigoBeats</a></li>
+  				<li><a href ="https://www.google.com/search?q=multyashka+sweet&source=lnms&tbm=isch&sa=X&ved=2ahUKEwj63JCrvu3yAhXinFwKHf42C8wQ_AUoAXoECAEQAw&biw=1394&bih=912">Multyaska Sweet</a></li>
+  				<li><a href ="https://www.google.com/search?q=kissyander&hl=en&source=lnms&tbm=isch&sa=X&ved=2ahUKEwie4q32ucj1AhXColwKHfvdD-kQ_AUoA3oECAEQBQ&biw=1144&bih=718&dpr=1">Kissyander</a></li>
+  				<li><a href ="https://www.google.com/search?q=grinu&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjq85m125P0AhXDnFwKHU3ECIEQ_AUoAnoECAEQBA&biw=1150&bih=865&dpr=1">Grinu</a></li>
+  				<li><a href ="https://www.google.com/search?q=majinbanzai&source=lnms&tbm=isch&sa=X&ved=2ahUKEwi56fS2vu3yAhUFlFwKHcC9BH0Q_AUoAXoECAEQAw&biw=1394&bih=912">MajinBanzai</a></li>
+  				<li><a href ="https://www.google.com/search?q=Nicholas+Kole&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjm6aeOvYn0AhXZh1wKHcKBD1kQ_AUoAXoECAEQAw&biw=1136&bih=823&dpr=1">Nicholas Kole</a></li>
+  				<li><a href ="https://www.artstation.com/nicolasaviori">Nicola Saviori</a></li>
+  				<li><a href ="https://www.google.com/search?q=krosrios&tbm=isch&hl=en&nfpr=1&sa=X&ved=2ahUKEwirxam2yN77AhVKiRoKHYYYDLkQvgV6BAgBEGI&biw=1178&bih=712">Krosrios</a></li>
+				</ul>
+
+  				<ul>
+  				<li class="groupheader">Work</li>
+  				<li><a href ="https://mail.google.com/mail/u/0/?hl=en-GB#inbox">Gmail</li>
+  				<li><a href ="https://drive.google.com/drive/u/0/my-drive">Google Drive</li>
+  				<li><a href ="https://www.instagram.com/">Instagram</li>
+  				<li><a href ="https://docs.google.com/document/u/0/">Google Docs</li>
+  				<li><a href ="https://docs.google.com/presentation/u/0/?tgif=d">Google Slides</li>
+  				<li><a href ="https://docs.google.com/presentation/d/1zsLM54wOMds8dgeVyaU2hriV7QlOqfbgoXjjnLze5xQ/edit#slide=id.g10d8d6b8017_1_31">Reference Slides</li>
+  				<li><a href ="https://www.amazon.co.uk/">Amazon</li>
+  				<li><a href ="https://carrd.co/dashboard">Carrd</li>
+  				<li><a href ="http://127.0.0.1:8384/#">Syncthings</li>
+				</ul>
+
+  				<ul>
+  				<li class="groupheader">Games</li>
+  				<li><a href ="https://discord.com/channels/@me">Discord</li>
+  				<li><a href ="https://store.steampowered.com/">Steam</li>
+  				<li><a href ="https://ec.nintendo.com/my/wishlist">Nintendo Wishlist</li>
+  				<li><a href ="https://serebii.net/">Serebii</li>
+  				<li><a href ="https://pokemondb.net/">Pokemon Database</li>
+				</ul>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+</body>
+</html>
