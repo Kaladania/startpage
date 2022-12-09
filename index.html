@@ -3,6 +3,7 @@
 <head>
 <title>New Tab</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans|Alexandria|Courier Prime">
+<script src="https://kit.fontawesome.com/c4ec6fc6e1.js" crossorigin="anonymous"></script>
 <style>
 :root {
   --accent: #FF003D;
@@ -33,7 +34,7 @@ html {
   width: 351px;
 }
 
-.images {
+#images {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -98,6 +99,45 @@ flex-wrap: wrap;
   margin-top: 32px;
 }
 
+#searchbar {
+  display: flex;
+  justify-content: center;
+  padding-top: 22px;
+}
+
+form {
+  width: 100%;
+}
+
+#q {
+  width: 100%;
+  color: white;
+  background-color: transparent;
+  border-radius: 5px;
+  height: 44px;
+  padding-left: 11px;
+  font-family: Open Sans, sans-serif;
+  border: 1px solid var(--secondary);
+  font-size: 14px;
+  transition: 0.15s;
+}
+
+#q:hover:not(:focus) {
+  border-color: white;
+  transition: 0.2s;
+}
+
+#q:focus {
+  border-color: var(--accent);
+  outline: transparent;
+}
+
+.fa-solid.fa-magnifying-glass {
+  align-self: center;
+  position: absolute;
+  left: 74vw;
+  color: var(--secondary);
+}
 
 .bookmarks {
   display: flex;
@@ -173,15 +213,20 @@ display: flex;
 <div class="startpage">
 	<div class ="flex-box">
 		<div class ="pageImages">
+			<img id="images" />
 
 			<script>
-			function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min)) + min;
-}
+			var description = [
+  "https://i.pinimg.com/originals/d4/3c/57/d43c5730370aadd9f9e1072ca8136dd4.gif",
+  "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/843ed5fe-83c3-4b84-afe9-4f1e6f990c06/ddopae8-3c351b05-6f00-45a8-8b7b-44271f639571.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzg0M2VkNWZlLTgzYzMtNGI4NC1hZmU5LTRmMWU2Zjk5MGMwNlwvZGRvcGFlOC0zYzM1MWIwNS02ZjAwLTQ1YTgtOGI3Yi00NDI3MWY2Mzk1NzEuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.GoalLN8stqr4EmPXJzdjdiK-8XOgiyB9nR9SE7WuBZI",
+  "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/843ed5fe-83c3-4b84-afe9-4f1e6f990c06/ddwfno5-0e601a26-2ff7-4e8c-b8e1-a38e1c897f8d.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzg0M2VkNWZlLTgzYzMtNGI4NC1hZmU5LTRmMWU2Zjk5MGMwNlwvZGR3Zm5vNS0wZTYwMWEyNi0yZmY3LTRlOGMtYjhlMS1hMzhlMWM4OTdmOGQuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.wcARtxsVVNOwYE3caEpqa2mMmxnrx4YZbNM-cBpL3gQ",
+  "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/843ed5fe-83c3-4b84-afe9-4f1e6f990c06/dc003yj-114c1b62-abc0-407f-bc9d-64300878506e.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzg0M2VkNWZlLTgzYzMtNGI4NC1hZmU5LTRmMWU2Zjk5MGMwNlwvZGMwMDN5ai0xMTRjMWI2Mi1hYmMwLTQwN2YtYmM5ZC02NDMwMDg3ODUwNmUuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.C265ciK50I1pnhbWcM9xV8JvQ-yhspsZHqtPpXtFMR0",
+  "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/843ed5fe-83c3-4b84-afe9-4f1e6f990c06/de16awp-3b1637f8-82c9-4858-8ae4-f96f88abca5c.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzg0M2VkNWZlLTgzYzMtNGI4NC1hZmU5LTRmMWU2Zjk5MGMwNlwvZGUxNmF3cC0zYjE2MzdmOC04MmM5LTQ4NTgtOGFlNC1mOTZmODhhYmNhNWMuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.azGw4vRQNaSD7SEVh9YSApwohLOWkxg6Sbr3KfdJAek",
+];
 
-document.write('<img class="images" src="Images/' + getRandomInt(1, 5) + '.gif">')
+var size = description.length
+var x = Math.floor(size*Math.random())
+document.getElementById('images').src=description[x];
 			</script>
 		</div>
 		<div class="pageLinks" style="flex-grow: 3"> 
@@ -247,6 +292,13 @@ document.write('<img class="images" src="Images/' + getRandomInt(1, 5) + '.gif">
 			</script>
 		</div>
   	</div>
+	<div id="searchbar">
+                
+                <form action="https://duckduckgo.com/" method="get">
+                    <input type="text" id="q" name="q" autofocus="" autocomplete="off">
+                </form>
+			<i class="fa-solid fa-magnifying-glass"></i>
+            </div>
 			<div class="bookmarks">
   				<ul>
   				<li class="groupheader">Media</li>
